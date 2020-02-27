@@ -225,7 +225,7 @@ public class TrainSeatBooking extends Application {
         stage.show();
         add.setOnAction(e -> {
             if(toBeReserved[0] != null){
-                if(!(name.getText().trim().isEmpty() || name.getText().length() != 1)) { // to stop giving q as the name
+                if(!(name.getText().trim().isEmpty() && name.getText().length() != 1)) { // to stop giving q as the name
                     name.setStyle("-fx-border-color: silver");
                     reserved.add(toBeReserved[0]);
                     names.add(name.getText());
@@ -256,7 +256,7 @@ public class TrainSeatBooking extends Application {
 
             System.out.print("Enter your name: ");
             String getName = sc.nextLine();
-            if(getName.toLowerCase() != "q") {
+            if(!getName.toLowerCase().equals("q")) {
                 if (names.indexOf(getName) != -1) {
                     reserved.remove(names.indexOf(getName));
                     names.remove(getName);
@@ -274,13 +274,15 @@ public class TrainSeatBooking extends Application {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter your name: ");
         String getName = sc.nextLine();
-
-        if (names.indexOf(getName) != -1) {
-            String seat = reserved.get(names.indexOf(getName)).getText();
-            System.out.println("Your Seat Is: " + seat);
-        } else {
-            System.out.println("No Seat Booked On Given Info");
-            findSeat();
+        if(!getName.toLowerCase().equals("q")) {
+            if (names.indexOf(getName) != -1) {
+                String seat = reserved.get(names.indexOf(getName)).getText();
+                System.out.println("Your Seat Is: " + seat);
+                menu();
+            } else {
+                System.out.println("No Seat Booked On Given Info");
+                findSeat();
+            }
         }
         menu();
     }
