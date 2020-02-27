@@ -26,7 +26,7 @@ public class TrainSeatBooking extends Application {
     @Override
     public void start(Stage primaryStage) {
         makeSeats();
-        Menu();
+        menu();
     }
     public Label makeLabel() {
         Label lbl = new Label();
@@ -57,7 +57,7 @@ public class TrainSeatBooking extends Application {
             c++;
         }
     }
-    public void Menu() {
+    public void menu() {
         Scanner sc = new Scanner(System.in);
         List<String> options = new ArrayList<>();
         options.add("A");options.add("V");options.add("E");options.add("D");options.add("F");
@@ -85,7 +85,7 @@ public class TrainSeatBooking extends Application {
                     break;
             }
         } else {
-            Menu();
+            menu();
         }
     }
     public void viewSeat() {
@@ -125,7 +125,7 @@ public class TrainSeatBooking extends Application {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    Menu();
+                    menu();
                 }
             });
         });
@@ -171,7 +171,7 @@ public class TrainSeatBooking extends Application {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    Menu();
+                    menu();
                 }
             });
         });
@@ -225,7 +225,7 @@ public class TrainSeatBooking extends Application {
         stage.show();
         add.setOnAction(e -> {
             if(toBeReserved[0] != null){
-                if(!name.getText().trim().isEmpty()) {
+                if(!(name.getText().trim().isEmpty() || name.getText().length() != 1)) { // to stop giving q as the name
                     name.setStyle("-fx-border-color: silver");
                     reserved.add(toBeReserved[0]);
                     names.add(name.getText());
@@ -234,7 +234,7 @@ public class TrainSeatBooking extends Application {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            Menu();
+                            menu();
                         }
                     });
                 }
@@ -246,7 +246,7 @@ public class TrainSeatBooking extends Application {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    Menu();
+                    menu();
                 }
             });
         });
@@ -256,16 +256,19 @@ public class TrainSeatBooking extends Application {
 
             System.out.print("Enter your name: ");
             String getName = sc.nextLine();
-            System.out.println(getName.toLowerCase());
-            if (names.indexOf(getName) != -1) {
-                reserved.remove(names.indexOf(getName));
-                names.remove(getName);
+            if(getName.toLowerCase() != "q") {
+                if (names.indexOf(getName) != -1) {
+                    reserved.remove(names.indexOf(getName));
+                    names.remove(getName);
+                    menu();
+                } else {
+                    System.out.println("No Seat Booked For The Provided Name!");
+                    deleteSeat();
+                }
             } else {
-                System.out.println("No Seat Booked On Given Info");
-                deleteSeat();
+                menu();
             }
 
-        Menu();
     }
     public void findSeat() {
         Scanner sc = new Scanner(System.in);
@@ -279,6 +282,6 @@ public class TrainSeatBooking extends Application {
             System.out.println("No Seat Booked On Given Info");
             findSeat();
         }
-        Menu();
+        menu();
     }
 }
