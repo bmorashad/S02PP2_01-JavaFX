@@ -1,31 +1,22 @@
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import javax.swing.*;
-import java.lang.management.MemoryUsage;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 public class TrainSeatBooking extends Application {
     final int NUM_SEATS = 42;
-
     List<Button> seats = new ArrayList<>();
     List<Button> reserved = new ArrayList<>();
     List<String> names = new ArrayList<>();
-    Button toBeReserved = null;
 
 
     public static void main(String[] args) {
@@ -205,6 +196,7 @@ public class TrainSeatBooking extends Application {
         GridPane.setColumnSpan(add, 2);
         grid.getChildren().add(add);
 
+        final Button[] toBeReserved = {null};
         for(Button seat : seats) {
             if(reserved.contains(seat)) {
                 seat.setOnAction(null);
@@ -212,12 +204,14 @@ public class TrainSeatBooking extends Application {
             } else {
                 seat.setStyle("");
                 seat.setOnAction(e ->  {
-                    if(toBeReserved != null){toBeReserved.setStyle("");}
-                    if( toBeReserved != seat) {
+                    if(toBeReserved[0] != null){
+                        toBeReserved[0].setStyle("");}
+                    if( toBeReserved[0] != seat) {
                         seat.setStyle("-fx-background-color: #5cff9d");
-                        toBeReserved = seat;
+                        toBeReserved[0] = seat;
                     }
-                    else { seat.setStyle("");toBeReserved = null;};
+                    else { seat.setStyle("");
+                        toBeReserved[0] = null;};
                 });
             }
             grid.getChildren().add(seat);
@@ -229,10 +223,10 @@ public class TrainSeatBooking extends Application {
         stage.setTitle("Book A Seat");
         stage.show();
         add.setOnAction(e -> {
-            if(toBeReserved != null){
-                reserved.add(toBeReserved);
+            if(toBeReserved[0] != null){
+                reserved.add(toBeReserved[0]);
                 names.add(name.getText());
-                toBeReserved = null;
+                toBeReserved[0] = null;
                 stage.close();
                 Platform.runLater(new Runnable() {
                     @Override

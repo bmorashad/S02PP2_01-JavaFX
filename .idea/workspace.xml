@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="44f6c26b-cc71-48c3-8850-5b91f7a975f7" name="Default Changelist" comment="" />
+    <list default="true" id="44f6c26b-cc71-48c3-8850-5b91f7a975f7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CWTEST@/TrainSeatBooking$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CWTEST@/TrainSeatBooking$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CWTEST@/TrainSeatBooking$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CWTEST@/TrainSeatBooking$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CWTEST@/TrainSeatBooking$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CWTEST@/TrainSeatBooking$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CWTEST@/TrainSeatBooking.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CWTEST@/TrainSeatBooking.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TrainSeatBooking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrainSeatBooking.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +22,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1YLhGMriNqolYRtBHHHPguDWfMw" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,6 +34,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -56,7 +69,7 @@
       <option name="presentableId" value="Default" />
       <updated>1582727684643</updated>
       <workItem from="1582727688532" duration="649000" />
-      <workItem from="1582738581095" duration="17180000" />
+      <workItem from="1582738581095" duration="18363000" />
     </task>
     <servers />
   </component>
@@ -64,22 +77,22 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1320" height="268" key="GridCell.Tab.0.bottom" timestamp="1582789776581">
+    <state width="1320" height="432" key="GridCell.Tab.0.bottom" timestamp="1582791877977">
       <screen x="0" y="24" width="1366" height="710" />
     </state>
-    <state width="1320" height="268" key="GridCell.Tab.0.bottom/0.24.1366.710@0.24.1366.710" timestamp="1582789776581" />
-    <state width="1320" height="268" key="GridCell.Tab.0.center" timestamp="1582789776581">
+    <state width="1320" height="432" key="GridCell.Tab.0.bottom/0.24.1366.710@0.24.1366.710" timestamp="1582791877977" />
+    <state width="1320" height="432" key="GridCell.Tab.0.center" timestamp="1582791877976">
       <screen x="0" y="24" width="1366" height="710" />
     </state>
-    <state width="1320" height="268" key="GridCell.Tab.0.center/0.24.1366.710@0.24.1366.710" timestamp="1582789776581" />
-    <state width="1320" height="268" key="GridCell.Tab.0.left" timestamp="1582789776581">
+    <state width="1320" height="432" key="GridCell.Tab.0.center/0.24.1366.710@0.24.1366.710" timestamp="1582791877976" />
+    <state width="1320" height="432" key="GridCell.Tab.0.left" timestamp="1582791877976">
       <screen x="0" y="24" width="1366" height="710" />
     </state>
-    <state width="1320" height="268" key="GridCell.Tab.0.left/0.24.1366.710@0.24.1366.710" timestamp="1582789776581" />
-    <state width="1320" height="268" key="GridCell.Tab.0.right" timestamp="1582789776581">
+    <state width="1320" height="432" key="GridCell.Tab.0.left/0.24.1366.710@0.24.1366.710" timestamp="1582791877976" />
+    <state width="1320" height="432" key="GridCell.Tab.0.right" timestamp="1582791877976">
       <screen x="0" y="24" width="1366" height="710" />
     </state>
-    <state width="1320" height="268" key="GridCell.Tab.0.right/0.24.1366.710@0.24.1366.710" timestamp="1582789776581" />
+    <state width="1320" height="432" key="GridCell.Tab.0.right/0.24.1366.710@0.24.1366.710" timestamp="1582791877976" />
     <state x="293" y="24" width="770" height="709" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1582788324582">
       <screen x="0" y="24" width="1366" height="710" />
     </state>
@@ -88,16 +101,5 @@
       <screen x="0" y="24" width="1366" height="710" />
     </state>
     <state x="416" y="159" width="524" height="439" key="extract.method.dialog/0.24.1366.710@0.24.1366.710" timestamp="1582790384329" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TrainSeatBooking.java</url>
-          <line>47</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
