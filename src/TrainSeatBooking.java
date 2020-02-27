@@ -190,11 +190,12 @@ public class TrainSeatBooking extends Application {
         grid.getChildren().add(name);
 
         Button add = new Button("Add");
-        add.setMinWidth(80);
-        add.setMaxWidth(150);
         GridPane.setConstraints(add, 5, 8);
-        GridPane.setColumnSpan(add, 2);
         grid.getChildren().add(add);
+
+        Button quit = new Button("Quit");
+        GridPane.setConstraints(quit, 6, 8);
+        grid.getChildren().add(quit);
 
         final Button[] toBeReserved = {null};
         for(Button seat : seats) {
@@ -224,17 +225,30 @@ public class TrainSeatBooking extends Application {
         stage.show();
         add.setOnAction(e -> {
             if(toBeReserved[0] != null){
-                reserved.add(toBeReserved[0]);
-                names.add(name.getText());
-                toBeReserved[0] = null;
-                stage.close();
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        Menu();
-                    }
-                });
+                if(!name.getText().trim().isEmpty()) {
+                    name.setStyle("-fx-border-color: silver");
+                    reserved.add(toBeReserved[0]);
+                    names.add(name.getText());
+                    toBeReserved[0] = null;
+                    stage.close();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            Menu();
+                        }
+                    });
+                }
             }
+        });
+        quit.setOnAction(e -> {
+            toBeReserved[0] = null;
+            stage.close();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Menu();
+                }
+            });
         });
     }
     public void deleteSeat() {
