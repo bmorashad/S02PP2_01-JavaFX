@@ -255,7 +255,7 @@ public class TrainSeatBooking extends Application {
         stage.show();
         add.setOnAction(e -> {
             if(toBeReserved[0] != null){
-                if(!(name.getText().trim().isEmpty() && name.getText().length() != 1)) { // to stop giving q as the name
+                if(!(name.getText().trim().isEmpty()) && name.getText().length() != 1) { // to stop giving q as the name
                     name.setStyle("-fx-border-color: silver");
                     reserved.add(toBeReserved[0]);
                     names.add(name.getText());
