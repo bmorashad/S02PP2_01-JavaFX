@@ -27,6 +27,12 @@ public class TrainSeatBooking extends Application {
 
     public static void main(String[] args) {
         launch(args);
+        String instructions = "Enter 'Q': exit the program\nEnter 'A': add customer to seat\n" +
+                "Enter 'V': add customer to view all the seats \nEnter 'E': view empty(available) seats\nEnter 'D': delete a customer from seat\n" +
+                "Enter 'F': find the seat of a given customer\nEnter 'S': write data to a database collection(overwite if already exist)" +
+                "Enter 'L': load from a database collection\nEnter 'O': display booked seats in alphabeticle order";
+        System.out.println("Follow these instructions to navitage the menu properly");
+        System.out.println(instructions);
     }
 
     @Override
@@ -76,8 +82,9 @@ public class TrainSeatBooking extends Application {
         Scanner sc = new Scanner(System.in);
         Character[] options = {'A', 'V', 'E', 'D', 'F', 'S', 'L', 'O', 'Q'};
         List<Character> optionsArrLst = Arrays.asList(options);
-        char option = sc.nextLine().toUpperCase().charAt(0);
+        System.out.print("Enter an option to proceed: ");
 
+        char option = sc.nextLine().toUpperCase().charAt(0);
         if (optionsArrLst.contains(option)) {
             switch (option) {
                 case 'A':
@@ -99,13 +106,14 @@ public class TrainSeatBooking extends Application {
                     saveToDatabase();
                     break;
                 case 'L':
-                    loadFromDatabas();
+                    loadFromDatabase();
                     break;
                 default:
                     Platform.exit();
                     break;
             }
         } else {
+            System.out.println("Invalid Option('q' to exit)");
             menu();
         }
     }
@@ -311,7 +319,7 @@ public class TrainSeatBooking extends Application {
             collection.insertOne(doc);
         }
     }
-    public void loadFromDatabas() {
+    public void loadFromDatabase() {
         MongoCursor<Document> cursor = collection.find().iterator();
         while (cursor.hasNext()) {
             Document doc = cursor.next();

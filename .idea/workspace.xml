@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="44f6c26b-cc71-48c3-8850-5b91f7a975f7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_bson_3_12_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongodb_driver_core_3_12_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongodb_driver_sync_3_12_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CWTEST@.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CWTEST@.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TrainSeatBooking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrainSeatBooking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TrainSeatBooking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TrainSeatBooking.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,9 +47,10 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RunManager">
     <configuration name="TrainSeatBooking" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -85,7 +80,7 @@
       <workItem from="1582738581095" duration="20716000" />
       <workItem from="1582794235183" duration="332000" />
       <workItem from="1582807929454" duration="71000" />
-      <workItem from="1583070845711" duration="2559000" />
+      <workItem from="1583070845711" duration="3947000" />
     </task>
     <servers />
   </component>
@@ -97,6 +92,10 @@
       <screen x="0" y="24" width="1366" height="710" />
     </state>
     <state x="302" y="48" width="751" height="660" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.24.1366.710@0.24.1366.710" timestamp="1583071859535" />
+    <state x="461" y="239" width="443" height="289" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1583074677894">
+      <screen x="0" y="24" width="1366" height="710" />
+    </state>
+    <state x="461" y="239" width="443" height="289" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.24.1366.710@0.24.1366.710" timestamp="1583074677894" />
     <state x="460" y="122" width="424" height="512" key="FileChooserDialogImpl" timestamp="1582807982671">
       <screen x="0" y="24" width="1366" height="710" />
     </state>
@@ -117,10 +116,10 @@
       <screen x="0" y="24" width="1366" height="710" />
     </state>
     <state width="1320" height="2" key="GridCell.Tab.0.right/0.24.1366.710@0.24.1366.710" timestamp="1582794566819" />
-    <state x="166" y="24" width="1024" height="709" key="SettingsEditor" timestamp="1583072083514">
+    <state x="166" y="24" width="1024" height="710" key="SettingsEditor" timestamp="1583075056488">
       <screen x="0" y="24" width="1366" height="710" />
     </state>
-    <state x="166" y="24" width="1024" height="709" key="SettingsEditor/0.24.1366.710@0.24.1366.710" timestamp="1583072083514" />
+    <state x="166" y="24" width="1024" height="710" key="SettingsEditor/0.24.1366.710@0.24.1366.710" timestamp="1583075056488" />
     <state x="293" y="24" width="770" height="709" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1582788324582">
       <screen x="0" y="24" width="1366" height="710" />
     </state>
