@@ -11,7 +11,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.bson.Document;
 
-import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +19,7 @@ import java.util.Scanner;
 public class TrainSeatBooking extends Application {
     final int NUM_SEATS = 42;
     final List<Button> SEATS = makeSeats();
+
     List<Button> reserved = new ArrayList<>();
     List<String> names = new ArrayList<>();
 
@@ -33,11 +33,12 @@ public class TrainSeatBooking extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        setDatabase("mongodb://localhost:27017", "trainBooking");
-        setCollection("trainSeatReservations");
+        connectToMongoCollection("mongodb://localhost:27017", "trainBooking", "trainSeatReservation");
         displayInstructions();
         menu();
     }
+
+    // Repeated tasks
     public void displayInstructions() {
         String instructions = "Enter 'Q': exit the program\nEnter 'A': add customer to seat\n" +
                 "Enter 'V': add customer to view all the seats \nEnter 'E': view empty(available) seats\nEnter 'D': delete a customer from seat\n" +
@@ -46,14 +47,12 @@ public class TrainSeatBooking extends Application {
         System.out.println("Follow these instructions to navitage the menu properly");
         System.out.println(instructions);
     }
-    public void setDatabase(String url, String databaseName) {
+    public void connectToMongoCollection(String url, String databaseName, String collectionName) {
         database = MongoClients.create(url).getDatabase(databaseName);
-    }
-    public void setCollection(String collectionName) {
         collection = database.getCollection(collectionName);
     }
-    public Label makeLabel() {
-        Label lbl = new Label();
+    public Label makeLabel(String lblTxt) {
+        Label lbl = new Label(lblTxt);
         lbl.setTextFill(Color.web("blue"));
         GridPane.setConstraints(lbl, 0, 0);
         GridPane.setColumnSpan(lbl,6);
@@ -83,12 +82,18 @@ public class TrainSeatBooking extends Application {
         }
         return seats;
     }
+//    public Button makeQuitButton(String col, String row) {
+//
+//    }
+
+    // Customer options
     public void menu() {
         Scanner sc = new Scanner(System.in);
         Character[] options = {'A', 'V', 'E', 'D', 'F', 'S', 'L', 'O', 'Q'};
+        // to check weather the list contains given option
         List<Character> optionsArrLst = Arrays.asList(options);
-        System.out.print("Enter an option to proceed: ");
 
+        System.out.print("Enter an option to proceed: ");
         char option = sc.nextLine().toUpperCase().charAt(0);
         if (optionsArrLst.contains(option)) {
             switch (option) {
@@ -126,9 +131,7 @@ public class TrainSeatBooking extends Application {
         Stage stage = new Stage();
 
         GridPane grid = makeGrid();
-        Label lbl = makeLabel();
-
-        lbl.setText("View Empty Seats");
+        Label lbl = makeLabel("View Empty Seats");
 
         Button quit = new Button("Quit");
         quit.setMinWidth(80);
@@ -164,7 +167,6 @@ public class TrainSeatBooking extends Application {
     public void emptySeats() {
         Stage stage = new Stage();
         GridPane grid = makeGrid();
-        Label lbl = makeLabel();
         Button quit = new Button("Quit");
         quit.setMinWidth(80);
         quit.setMaxWidth(150);
@@ -181,6 +183,7 @@ public class TrainSeatBooking extends Application {
                 i++;
             }
         }
+        Label lbl = makeLabel("");
         // different label when all seats are booked
         if(i > 0) {
             lbl.setText("View Empty Seats");
@@ -189,8 +192,6 @@ public class TrainSeatBooking extends Application {
             lbl.setText("Sorry, All Seats Are Booked");
             lbl.setStyle("-fx-font-size: 26px");
         }
-        GridPane.setConstraints(lbl, 0, 0);
-        GridPane.setColumnSpan(lbl,6);
         grid.getChildren().add(lbl);
 
         Scene scene = new Scene(grid, 500, 500);
@@ -210,9 +211,8 @@ public class TrainSeatBooking extends Application {
     public void addSeats() {
         Stage stage = new Stage();
 
-        Label lbl = makeLabel();
+        Label lbl = makeLabel("Book A Seat");
         GridPane grid = makeGrid();
-        lbl.setText("Book a seat");
         grid.getChildren().add(lbl);
 
         TextField name = new TextField();
