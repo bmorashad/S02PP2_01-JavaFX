@@ -1,3 +1,4 @@
+import com.mongodb.client.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -8,7 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.bson.Document;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,9 +22,8 @@ public class TrainSeatBooking extends Application {
     List<Button> reserved = new ArrayList<>();
     List<String> names = new ArrayList<>();
 
-    MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
-    MongoDatabase database = mongoClient.getDatabase("test");
-    MongoCollection<Document> collection = database.getCollection("trainReservation");
+    MongoDatabase database;
+    MongoCollection<Document> collection;
 
     public static void main(String[] args) {
         launch(args);
@@ -28,7 +31,15 @@ public class TrainSeatBooking extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        setDatabase("mongodb://localhost:27017", "trainBooking");
+        setCollection("trainSeatReservations");
         menu();
+    }
+    public void setDatabase(String url, String databaseName) {
+        database = MongoClients.create(url).getDatabase(databaseName);
+    }
+    public void setCollection(String collectionName) {
+        collection = database.getCollection(collectionName);
     }
     public Label makeLabel() {
         Label lbl = new Label();
@@ -63,28 +74,34 @@ public class TrainSeatBooking extends Application {
     }
     public void menu() {
         Scanner sc = new Scanner(System.in);
-        List<String> options = new ArrayList<>();
-        options.add("A");options.add("V");options.add("E");options.add("D");options.add("F");
-        options.add("S");options.add("L");options.add("O");options.add("Q");
-        String option = sc.nextLine();
-        if (options.contains(option.toUpperCase())) {
-            switch (option.toUpperCase()) {
-                case "A":
+        Character[] options = {'A', 'V', 'E', 'D', 'F', 'S', 'L', 'O', 'Q'};
+        List<Character> optionsArrLst = Arrays.asList(options);
+        char option = sc.nextLine().toUpperCase().charAt(0);
+
+        if (optionsArrLst.contains(option)) {
+            switch (option) {
+                case 'A':
                     addSeats();
                     break;
-                case "E":
+                case 'E':
                     emptySeats();
                     break;
-                case "V":
+                case 'V':
                     viewSeat();
                     break;
-                case "D":
+                case 'D':
                     deleteSeat();
                     break;
-                case "F":
+                case 'F':
                     findSeat();
                     break;
-                case "Q":
+                case 'S':
+                    saveToDatabase();
+                    break;
+                case 'L':
+                    loadFromDatabas();
+                    break;
+                default:
                     Platform.exit();
                     break;
             }
@@ -284,5 +301,26 @@ public class TrainSeatBooking extends Application {
             }
         }
         menu();
+    }
+    public void saveToDatabase() {
+        collection.drop();
+        for (Button seat : reserved) {
+            String name = names.get(reserved.indexOf(seat));
+            String seatNum = seat.getText();
+            Document doc = new Document("name", name).append("seat", seatNum);
+            collection.insertOne(doc);
+        }
+    }
+    public void loadFromDatabas() {
+        MongoCursor<Document> cursor = collection.find().iterator();
+        while (cursor.hasNext()) {
+            Document doc = cursor.next();
+            Button seat = SEATS.get((int) doc.get("seat") - 1);
+            String name = (String) doc.get("name");
+            if(!reserved.contains(seat)) {
+                reserved.add(seat);
+                names.add(name);
+            }
+        }
     }
 }
