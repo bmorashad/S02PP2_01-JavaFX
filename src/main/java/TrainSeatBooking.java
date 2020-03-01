@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.bson.Document;
 
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,19 +28,23 @@ public class TrainSeatBooking extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        String instructions = "Enter 'Q': exit the program\nEnter 'A': add customer to seat\n" +
-                "Enter 'V': add customer to view all the seats \nEnter 'E': view empty(available) seats\nEnter 'D': delete a customer from seat\n" +
-                "Enter 'F': find the seat of a given customer\nEnter 'S': write data to a database collection(overwite if already exist)" +
-                "Enter 'L': load from a database collection\nEnter 'O': display booked seats in alphabeticle order";
-        System.out.println("Follow these instructions to navitage the menu properly");
-        System.out.println(instructions);
+
     }
 
     @Override
     public void start(Stage primaryStage) {
         setDatabase("mongodb://localhost:27017", "trainBooking");
         setCollection("trainSeatReservations");
+        displayInstructions();
         menu();
+    }
+    public void displayInstructions() {
+        String instructions = "Enter 'Q': exit the program\nEnter 'A': add customer to seat\n" +
+                "Enter 'V': add customer to view all the seats \nEnter 'E': view empty(available) seats\nEnter 'D': delete a customer from seat\n" +
+                "Enter 'F': find the seat of a given customer\nEnter 'S': write data to a database collection(overwite if already exist)" +
+                "Enter 'L': load from a database collection\nEnter 'O': display booked seats in alphabeticle order";
+        System.out.println("Follow these instructions to navitage the menu properly");
+        System.out.println(instructions);
     }
     public void setDatabase(String url, String databaseName) {
         database = MongoClients.create(url).getDatabase(databaseName);
