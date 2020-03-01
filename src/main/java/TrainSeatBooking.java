@@ -28,7 +28,6 @@ public class TrainSeatBooking extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
     }
 
     @Override
@@ -38,7 +37,7 @@ public class TrainSeatBooking extends Application {
         menu();
     }
 
-    // Repeated tasks
+    // Common tasks
     public void displayInstructions() {
         String instructions = "Enter 'Q': exit the program\nEnter 'A': add customer to seat\n" +
                 "Enter 'V': add customer to view all the seats \nEnter 'E': view empty(available) seats\nEnter 'D': delete a customer from seat\n" +
@@ -82,40 +81,46 @@ public class TrainSeatBooking extends Application {
         }
         return seats;
     }
-//    public Button makeQuitButton(String col, String row) {
-//
-//    }
+    public void onQuit(Stage stage) {
+            stage.close();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    menu();
+                }
+            });
+    }
 
     // Customer options
     public void menu() {
         Scanner sc = new Scanner(System.in);
-        Character[] options = {'A', 'V', 'E', 'D', 'F', 'S', 'L', 'O', 'Q'};
+        String[] options = {"A", "V", "E", "D", "F", "S", "L", "O", "Q"};
         // to check weather the list contains given option
-        List<Character> optionsArrLst = Arrays.asList(options);
+        List<String> optionsArrLst = Arrays.asList(options);
 
         System.out.print("Enter an option to proceed: ");
-        char option = sc.nextLine().toUpperCase().charAt(0);
+        String option = sc.nextLine().toUpperCase();
         if (optionsArrLst.contains(option)) {
             switch (option) {
-                case 'A':
+                case "A":
                     addSeats();
                     break;
-                case 'E':
+                case "E":
                     emptySeats();
                     break;
-                case 'V':
+                case "V":
                     viewSeat();
                     break;
-                case 'D':
+                case "D":
                     deleteSeat();
                     break;
-                case 'F':
+                case "F":
                     findSeat();
                     break;
-                case 'S':
+                case "S":
                     saveToDatabase();
                     break;
-                case 'L':
+                case "L":
                     loadFromDatabase();
                     break;
                 default:
@@ -155,13 +160,10 @@ public class TrainSeatBooking extends Application {
         stage.setTitle("Book A Seat");
         stage.show();
         quit.setOnAction(e -> {
-            stage.close();
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    menu();
-                }
-            });
+            onQuit(stage);
+        });
+        stage.setOnCloseRequest(e -> {
+            onQuit(stage);
         });
     }
     public void emptySeats() {
@@ -199,13 +201,10 @@ public class TrainSeatBooking extends Application {
         stage.setTitle("Book A Seat");
         stage.show();
         quit.setOnAction(e -> {
-            stage.close();
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    menu();
-                }
-            });
+            onQuit(stage);
+        });
+        stage.setOnCloseRequest(event -> {
+            onQuit(stage);
         });
     }
     public void addSeats() {
@@ -272,14 +271,10 @@ public class TrainSeatBooking extends Application {
             }
         });
         quit.setOnAction(e -> {
-            toBeReserved[0] = null;
-            stage.close();
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    menu();
-                }
-            });
+            onQuit(stage);
+        });
+        stage.setOnCloseRequest(e -> {
+            onQuit(stage);
         });
     }
     public void deleteSeat() {
@@ -323,17 +318,19 @@ public class TrainSeatBooking extends Application {
             Document doc = new Document("name", name).append("seat", seatNum);
             collection.insertOne(doc);
         }
+        menu();
     }
     public void loadFromDatabase() {
         MongoCursor<Document> cursor = collection.find().iterator();
         while (cursor.hasNext()) {
             Document doc = cursor.next();
-            Button seat = SEATS.get((int) doc.get("seat") - 1);
+            Button seat = SEATS.get(Integer.parseInt((String) doc.get("seat")) - 1); // doc value is obj
             String name = (String) doc.get("name");
             if(!reserved.contains(seat)) {
                 reserved.add(seat);
                 names.add(name);
             }
         }
+        menu();
     }
 }
