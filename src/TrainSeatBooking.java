@@ -14,10 +14,13 @@ import java.util.Scanner;
 
 public class TrainSeatBooking extends Application {
     final int NUM_SEATS = 42;
-    List<Button> seats = new ArrayList<>();
+    final List<Button> SEATS = makeSeats();
     List<Button> reserved = new ArrayList<>();
     List<String> names = new ArrayList<>();
 
+    MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
+    MongoDatabase database = mongoClient.getDatabase("test");
+    MongoCollection<Document> collection = database.getCollection("trainReservation");
 
     public static void main(String[] args) {
         launch(args);
@@ -25,7 +28,6 @@ public class TrainSeatBooking extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        makeSeats();
         menu();
     }
     public Label makeLabel() {
@@ -42,7 +44,8 @@ public class TrainSeatBooking extends Application {
         grid.setHgap(10);
         return grid;
     }
-    public void makeSeats() {
+    public List<Button> makeSeats() {
+        List<Button> seats = new ArrayList<>();
         for(int i = 0, c = 0, r = 0; i < NUM_SEATS; i++) {
             Button seat = new Button("" + (i+1));
             seat.setMaxSize(100, 100);
@@ -56,6 +59,7 @@ public class TrainSeatBooking extends Application {
             seats.add(seat);
             c++;
         }
+        return seats;
     }
     public void menu() {
         Scanner sc = new Scanner(System.in);
@@ -95,9 +99,6 @@ public class TrainSeatBooking extends Application {
         Label lbl = makeLabel();
 
         lbl.setText("View Empty Seats");
-        GridPane.setConstraints(lbl, 0, 0);
-        GridPane.setColumnSpan(lbl,6);
-
 
         Button quit = new Button("Quit");
         quit.setMinWidth(80);
@@ -107,7 +108,7 @@ public class TrainSeatBooking extends Application {
         grid.getChildren().add(quit);
 
         grid.getChildren().add(lbl);
-        for(Button seat : seats) {
+        for(Button seat : SEATS) {
             seat.setOnAction(null);
             if(!reserved.contains(seat)) {
                 seat.setStyle("-fx-background-color: #5cff9d");
@@ -142,7 +143,7 @@ public class TrainSeatBooking extends Application {
         grid.getChildren().add(quit);
 
         int i = 0; // to count reserved seats
-        for(Button seat : seats) {
+        for(Button seat : SEATS) {
             if(!reserved.contains(seat)) {
                 seat.setOnAction(null);
                 seat.setStyle("");
@@ -198,7 +199,7 @@ public class TrainSeatBooking extends Application {
         grid.getChildren().add(quit);
 
         final Button[] toBeReserved = {null};
-        for(Button seat : seats) {
+        for(Button seat : SEATS) {
             if(reserved.contains(seat)) {
                 seat.setOnAction(null);
                 seat.setStyle("-fx-background-color: #ff9ca7");
@@ -253,7 +254,6 @@ public class TrainSeatBooking extends Application {
     }
     public void deleteSeat() {
         Scanner sc = new Scanner(System.in);
-
             System.out.print("Enter your name: ");
             String getName = sc.nextLine();
             if(!getName.toLowerCase().equals("q")) {
@@ -268,7 +268,6 @@ public class TrainSeatBooking extends Application {
             } else {
                 menu();
             }
-
     }
     public void findSeat() {
         Scanner sc = new Scanner(System.in);
